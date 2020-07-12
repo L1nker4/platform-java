@@ -1,0 +1,78 @@
+server:
+  port: 9009
+
+
+spring:
+  datasource:
+    url: jdbc:p6spy:mysql://47.93.37.255:3306/platform?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: zerol1nker4
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    hikari:
+      connection-timeout: 30000
+      max-lifetime: 1800000
+      pool-name: ForestHikariCP
+
+  aop:
+    proxy-target-class: true
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        min-idle: 8
+        max-idle: 500
+        max-active: 2000
+        max-wait: 10000
+    timeout: 0
+    database: 11
+
+
+
+#mybatis plus 设置
+mybatis-plus:
+  type-aliases-package:
+  mapper-locations: classpath:mapper/*/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  global-config:
+    # 关闭 mybatis-plus的 banner
+    banner: false
+
+#actuator配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+forest:
+  # 是否异步记录用户操作日志
+  openAopLog: true
+  # 单次最大批量入库数量
+  max:
+    batch:
+      insert:
+        num: 1000
+  shiro:
+    # 后端免认证接口 url
+    anonUrl: /login,/logout/**,/regist,/user/check/**,/swagger-resources/**,/webjars/**,/v2/**,/swagger-ui.html/**,/favicon.ico,/actuator/**,/code
+    # token有效期，单位秒
+    jwtTimeOut: 3600
+  # Swagger相关配置
+  swagger:
+    basePackage: wang.l1n.forest
+    title: Forest VUE API
+    description: Forest API
+    version: 1.0
+    author: L1nker4
+    url: https://l1n.wang
+    email: l1nker4@outlook.com
+    license: Apache 2.0
+    licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
