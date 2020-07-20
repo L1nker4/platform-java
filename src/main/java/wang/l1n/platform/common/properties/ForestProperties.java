@@ -22,4 +22,6 @@ public class ForestProperties {
     private boolean openAopLog = true;
 
     private SwaggerProperties swagger = new SwaggerProperties();
+
+    private AliyunOssProperties oss = new AliyunOssProperties();
 }

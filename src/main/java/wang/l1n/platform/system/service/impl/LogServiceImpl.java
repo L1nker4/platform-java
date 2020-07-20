@@ -76,7 +76,7 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void saveLog(ProceedingJoinPoint joinPoint, SysLog log) throws JsonProcessingException {
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
