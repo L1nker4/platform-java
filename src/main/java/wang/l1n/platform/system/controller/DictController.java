@@ -47,7 +47,7 @@ public class DictController extends BaseController {
     @Log("新增字典")
     @PostMapping
     @RequiresPermissions("dict:add")
-    public void addDict(@Valid Dict dict) throws ForestException {
+    public void addDict(@Valid Dict dict) {
         try {
             this.dictService.createDict(dict);
         } catch (Exception e) {

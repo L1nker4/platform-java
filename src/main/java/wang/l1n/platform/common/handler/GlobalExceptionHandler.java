@@ -42,24 +42,32 @@ public class GlobalExceptionHandler {
         return new CommonResult().failed(e.getMessage());
     }
 
+    //线上环境捕获所有异常
+//    @ExceptionHandler(value = Exception.class)
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    public CommonResult handleAllException(Exception e) {
+//        log.error("系统错误：{}", e.getMessage());
+//        return new CommonResult().failed(e.getMessage());
+//    }
+
     /**
      * 统一处理请求参数校验(实体对象传参)
      *
      * @param e BindException
      * @return CommonResult
      */
-    @ExceptionHandler(BindException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public CommonResult validExceptionHandler(BindException e) {
-        StringBuilder message = new StringBuilder();
-        List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
-        for (FieldError error : fieldErrors) {
-            message.append(error.getField()).append(error.getDefaultMessage()).append(StringPool.COMMA);
-        }
-        message = new StringBuilder(message.substring(0, message.length() - 1));
-        return new CommonResult().validateFailed(message.toString());
-
-    }
+//    @ExceptionHandler(BindException.class)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    public CommonResult validExceptionHandler(BindException e) {
+//        StringBuilder message = new StringBuilder();
+//        List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+//        for (FieldError error : fieldErrors) {
+//            message.append(error.getField()).append(error.getDefaultMessage()).append(StringPool.COMMA);
+//        }
+//        message = new StringBuilder(message.substring(0, message.length() - 1));
+//        return new CommonResult().validateFailed(message.toString());
+//
+//    }
 
     /**
      * 统一处理请求参数校验(普通传参)

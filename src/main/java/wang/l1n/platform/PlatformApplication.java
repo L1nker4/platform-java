@@ -7,12 +7,12 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * @author     ：L1nker4
- * @date       ： 创建于  2020/1/4 14:01
+ * @author ：L1nker4
+ * @date ： 创建于  2020/1/4 14:01
  * @description：
  */
 @SpringBootApplication
-@MapperScan("wang.l1n.platform.system.dao")
+@MapperScan({"wang.l1n.platform.system.dao", "wang.l1n.platform.platform.pms.mapper"})
 @EnableTransactionManagement
 @EnableCaching
 public class PlatformApplication {
