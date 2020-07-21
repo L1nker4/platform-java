@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import wang.l1n.platform.common.entity.common.BaseEntity;
 import wang.l1n.platform.platform.pms.entity.enums.ShowStatusEnums;
 
 /**
@@ -22,7 +23,7 @@ import wang.l1n.platform.platform.pms.entity.enums.ShowStatusEnums;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("pms_product_category")
-public class ProductCategory implements Serializable {
+public class ProductCategory extends BaseEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
 

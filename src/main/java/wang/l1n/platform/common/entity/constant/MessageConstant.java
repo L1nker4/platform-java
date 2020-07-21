@@ -8,4 +8,8 @@ package wang.l1n.platform.common.entity.constant;
 public class MessageConstant {
 
     public static final String ADD_SUCCESS_MESSAGE = "添加成功";
+
+    public static final String UPDATE_SUCCESS_MESSAGE = "修改成功";
+
+    public static final String DELETE_SUCCESS_MESSAGE = "删除成功";
 }

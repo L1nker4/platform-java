@@ -1,10 +1,13 @@
 package wang.l1n.platform.common.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import wang.l1n.platform.common.entity.ForestConstant;
 import wang.l1n.platform.common.entity.QueryRequest;
+
+import java.util.Collections;
 
 /**
  * @author     ：L1nker4
@@ -35,16 +38,16 @@ public class SortUtil {
                 && !StringUtils.equalsIgnoreCase(request.getSortField(), "undefined")
                 && !StringUtils.equalsIgnoreCase(request.getSortOrder(), "undefined")) {
             if (StringUtils.equals(request.getSortOrder(), ForestConstant.ORDER_DESC)) {
-                page.setDesc(sortField);
+                page.setOrders(Collections.singletonList(OrderItem.desc(request.getSortField())));
             } else {
-                page.setAsc(sortField);
+                page.setOrders(Collections.singletonList(OrderItem.asc(request.getSortField())));
             }
         } else {
             if (StringUtils.isNotBlank(defaultSort)) {
                 if (StringUtils.equals(defaultOrder, ForestConstant.ORDER_DESC)) {
-                    page.setDesc(defaultSort);
+                    page.setOrders(Collections.singletonList(OrderItem.desc(defaultSort)));
                 } else {
-                    page.setAsc(defaultSort);
+                    page.setOrders(Collections.singletonList(OrderItem.asc(defaultSort)));
                 }
             }
         }

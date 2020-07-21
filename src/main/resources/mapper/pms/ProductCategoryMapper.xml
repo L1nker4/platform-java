@@ -2,9 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wang.l1n.platform.platform.pms.mapper.ProductCategoryMapper">
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, parent_id, name, level, product_count, product_unit, nav_status, show_status, sort, logo, keywords, description
-    </sql>
+    <select id="getChildId" resultType="java.lang.Long">
+        select id from pms_product_category where parent_id = #{parentId}
+    </select>
 
 </mapper>
