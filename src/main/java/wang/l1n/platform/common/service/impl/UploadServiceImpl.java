@@ -25,8 +25,8 @@ public class UploadServiceImpl implements UploadService {
 
 
     @Override
-    public CommonResult upload(HttpServletRequest request) {
-        String url = aliyunOssService.multipartFileUpload(request, KEY_PREFIX);
+    public CommonResult upload(MultipartFile file) {
+        String url = aliyunOssService.swaggerFileUpload(KEY_PREFIX, file);
         return new CommonResult().data(url);
     }
 

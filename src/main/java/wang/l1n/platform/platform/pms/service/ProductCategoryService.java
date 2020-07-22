@@ -19,10 +19,10 @@ public interface ProductCategoryService extends IService<ProductCategory> {
 
     /**
      * 删除
-     * @param request
+     * @param ids
      * @return
      */
-    CommonResult delete(DeleteProductCategoryRequest request);
+    CommonResult deleteCategory(String ids);
 
     /**
      * 获取分类列表

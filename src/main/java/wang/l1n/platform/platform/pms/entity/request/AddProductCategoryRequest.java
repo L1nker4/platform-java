@@ -26,7 +26,6 @@ public class AddProductCategoryRequest {
     private String name;
 
     @ApiModelProperty(value = "分类级别：0->1级；1->2级")
-    @NotNull(message = "{required}")
     private Integer level;
 
     @ApiModelProperty(value = "商品数量")
@@ -50,7 +49,6 @@ public class AddProductCategoryRequest {
     private Integer sort;
 
     @ApiModelProperty(value = "logo图片地址")
-    @NotBlank(message = "{required}")
     private String logo;
 
     @ApiModelProperty(value = "关键字")

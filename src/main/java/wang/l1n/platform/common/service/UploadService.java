@@ -14,10 +14,10 @@ public interface UploadService {
 
     /**
      * 文件上传
-     * @param request 文件流
-     * @return 文件地址
+     * @param file
+     * @return
      */
-    CommonResult upload(HttpServletRequest request);
+    CommonResult upload(MultipartFile file);
 
     /**
      * 测试文件上传

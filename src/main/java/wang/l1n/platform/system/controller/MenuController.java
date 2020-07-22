@@ -50,7 +50,7 @@ public class MenuController extends BaseController {
     @Log("新增菜单/按钮")
     @PostMapping
     @RequiresPermissions("menu:add")
-    public void addMenu(@Valid Menu menu) throws ForestException {
+    public void addMenu(@Valid @RequestBody Menu menu) throws ForestException {
         try {
             this.menuService.createMenu(menu);
         } catch (Exception e) {

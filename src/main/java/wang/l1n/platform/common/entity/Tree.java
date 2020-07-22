@@ -1,7 +1,9 @@
 package wang.l1n.platform.common.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import wang.l1n.platform.platform.pms.entity.enums.ShowStatusEnums;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,6 +16,24 @@ public class Tree<T> {
     private String id;
 
     private String key;
+
+    private String name;
+
+    private Integer level;
+
+    private Integer productCount;
+
+    private String productUnit;
+
+    private ShowStatusEnums showStatus;
+
+    private ShowStatusEnums navStatus;
+
+    private String logo;
+
+    private String keywords;
+
+    private String description;
 
     private String icon;
 

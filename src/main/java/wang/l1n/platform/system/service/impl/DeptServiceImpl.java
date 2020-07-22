@@ -50,18 +50,20 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
     public List<Dept> findDepts(Dept dept, QueryRequest request) {
         QueryWrapper<Dept> queryWrapper = new QueryWrapper<>();
 
-        if (StringUtils.isNotBlank(dept.getDeptName()))
+        if (StringUtils.isNotBlank(dept.getDeptName())) {
             queryWrapper.lambda().eq(Dept::getDeptName, dept.getDeptName());
-        if (StringUtils.isNotBlank(dept.getCreateTimeFrom()) && StringUtils.isNotBlank(dept.getCreateTimeTo()))
+        }
+        if (StringUtils.isNotBlank(dept.getCreateTimeFrom()) && StringUtils.isNotBlank(dept.getCreateTimeTo())) {
             queryWrapper.lambda()
                     .ge(Dept::getCreateTime, dept.getCreateTimeFrom())
                     .le(Dept::getCreateTime, dept.getCreateTimeTo());
+        }
         SortUtil.handleWrapperSort(request, queryWrapper, "sort", ForestConstant.ORDER_ASC, true);
         return this.baseMapper.selectList(queryWrapper);
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void createDept(Dept dept) {
         Long parentId = dept.getParentId();
         if (parentId == null) {
@@ -72,14 +74,14 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void updateDept(Dept dept) {
         dept.setUpdateTime(new Date());
         this.baseMapper.updateById(dept);
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void deleteDepts(String[] deptIds) {
         this.delete(Arrays.asList(deptIds));
     }

@@ -26,6 +26,7 @@ import wang.l1n.platform.system.dao.LoginLogMapper;
 import wang.l1n.platform.system.entity.LoginLog;
 import wang.l1n.platform.system.entity.User;
 import wang.l1n.platform.system.entity.UserConfig;
+import wang.l1n.platform.system.entity.request.LoginUserRequest;
 import wang.l1n.platform.system.manager.UserManager;
 import wang.l1n.platform.system.service.LoginLogService;
 import wang.l1n.platform.system.service.UserService;
@@ -56,15 +57,12 @@ public class LoginController {
 
     @PostMapping("/login")
     @Limit(key = "login", period = 60, count = 20, name = "登录接口", prefix = "limit")
-    public CommonResult login(
-            @NotBlank(message = "{required}") String username,
-            @NotBlank(message = "{required}") String password,
-            @NotBlank(message = "{required}") String uuid,
-            @NotBlank(message = "{required}") String code,
-            HttpServletRequest request) throws Exception {
-        username = StringUtils.lowerCase(username);
-        password = MD5Util.encrypt(username, password);
-
+    public CommonResult login(@RequestBody LoginUserRequest loginUserRequest,
+                              HttpServletRequest request) throws Exception {
+        String username = StringUtils.lowerCase(loginUserRequest.getUsername());
+        String password = MD5Util.encrypt(username, loginUserRequest.getPassword());
+        String uuid = loginUserRequest.getUuid();
+        String code = loginUserRequest.getCode();
         //首先校验验证码是否正确
         String rightCode = redisService.get(uuid);
         redisService.del(uuid);

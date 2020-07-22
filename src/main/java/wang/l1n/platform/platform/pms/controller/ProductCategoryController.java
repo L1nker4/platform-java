@@ -1,16 +1,12 @@
 package wang.l1n.platform.platform.pms.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.p6spy.engine.logging.Category;
+import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.poi.ss.formula.functions.T;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import wang.l1n.platform.common.annotation.Log;
@@ -19,11 +15,15 @@ import wang.l1n.platform.common.entity.QueryRequest;
 import wang.l1n.platform.common.entity.constant.MessageConstant;
 import wang.l1n.platform.platform.pms.entity.ProductCategory;
 import wang.l1n.platform.platform.pms.entity.request.AddProductCategoryRequest;
-import wang.l1n.platform.platform.pms.entity.request.DeleteProductCategoryRequest;
+import wang.l1n.platform.platform.pms.entity.request.ExportProductCategoryRequest;
 import wang.l1n.platform.platform.pms.entity.request.UpdateProductCategoryRequest;
 import wang.l1n.platform.platform.pms.service.ProductCategoryService;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -34,8 +34,9 @@ import javax.validation.Valid;
  * @since 2020-07-20
  */
 @RestController
-@RequestMapping("/product/category")
-@Api(value = "/product/category", tags = {"商品-分类"})
+@RequestMapping("category")
+@Api(value = "/category", tags = {"商品-分类"})
+@Slf4j
 public class ProductCategoryController {
 
     @Autowired
@@ -67,10 +68,29 @@ public class ProductCategoryController {
         return new CommonResult().success(MessageConstant.UPDATE_SUCCESS_MESSAGE);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{ids}")
     @Log("删除商品分类")
-    public CommonResult deleteCategory(@Valid @RequestBody DeleteProductCategoryRequest request){
-        return productCategoryService.delete(request);
+    @RequiresPermissions("pms:category:delete")
+    public CommonResult deleteCategory(@NotBlank(message = "{required}") @PathVariable String ids){
+        return productCategoryService.deleteCategory(ids);
+    }
+
+    @PostMapping("excel")
+    @RequiresPermissions("pms:category:export")
+    public void export(HttpServletResponse response){
+        try {
+            List<ProductCategory> list = productCategoryService.list();
+            List<ExportProductCategoryRequest> exportList = new ArrayList<>();
+            list.forEach((category -> {
+                ExportProductCategoryRequest request = new ExportProductCategoryRequest();
+                BeanUtils.copyProperties(category, request );
+                exportList.add(request);
+            }));
+            ExcelKit.$Export(ExportProductCategoryRequest.class, response)
+                    .downXlsx(exportList, false);
+        }catch (Exception e){
+            log.error("导出失败",e);
+        }
     }
 
 }

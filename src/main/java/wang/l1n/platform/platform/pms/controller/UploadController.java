@@ -26,10 +26,10 @@ public class UploadController {
     @Autowired
     private UploadService uploadService;
 
-    @PostMapping("/upload")
+    @PostMapping()
     @ApiOperation("上传")
-    public CommonResult upload(HttpServletRequest request){
-        return uploadService.upload(request);
+    public CommonResult upload(@RequestBody MultipartFile file){
+        return uploadService.upload(file);
     }
 
     @PostMapping("/test")

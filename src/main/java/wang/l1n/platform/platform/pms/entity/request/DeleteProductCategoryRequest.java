@@ -15,10 +15,7 @@ import javax.validation.constraints.NotNull;
 @ApiModel(value="Delete ProductCategory Request", description="商品管理-分类表")
 public class DeleteProductCategoryRequest {
 
-    @ApiModelProperty(value = "商品分类id")
+    @ApiModelProperty(value = "多个商品分类id，逗号分割")
     @NotNull(message = "{required}")
-    private Long id;
-
-    @ApiModelProperty(value = "上级分类的编号：0表示一级分类")
-    private Long parentId;
+    private String ids;
 }

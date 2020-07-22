@@ -15,12 +15,11 @@ public class QueryRequest implements Serializable {
 
     private static final long serialVersionUID = -4869594085374385813L;
 
-    @NotNull(message = "分页参数不能为空")
     private int pageSize = 10;
 
-    @NotNull(message = "分页参数不能为空")
     private int pageNum = 1;
 
     private String sortField;
+
     private String sortOrder;
 }

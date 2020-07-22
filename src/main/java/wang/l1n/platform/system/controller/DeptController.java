@@ -41,7 +41,7 @@ public class DeptController extends BaseController {
     @Log("新增部门")
     @PostMapping
     @RequiresPermissions("dept:add")
-    public void addDept(@Valid Dept dept) throws ForestException {
+    public void addDept(@Valid @RequestBody Dept dept) throws ForestException {
         try {
             this.deptService.createDept(dept);
         } catch (Exception e) {

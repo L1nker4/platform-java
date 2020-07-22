@@ -30,7 +30,6 @@ public class UpdateProductCategoryRequest {
     private String name;
 
     @ApiModelProperty(value = "分类级别：0->1级；1->2级")
-    @NotNull(message = "{required}")
     private Integer level;
 
     @ApiModelProperty(value = "商品数量")
