@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.wuwenze.poi.annotation.Excel;
 import com.wuwenze.poi.annotation.ExcelField;
 import lombok.Data;
+import lombok.ToString;
 import wang.l1n.platform.common.converter.TimeConverter;
 import wang.l1n.platform.common.entity.RegexpConstant;
 
@@ -27,6 +28,7 @@ import java.util.Date;
 @Data
 @TableName("sys_user")
 @Excel("用户信息表")
+@ToString
 public class User implements Serializable {
 
     private static final long serialVersionUID = -4852732617765810959L;

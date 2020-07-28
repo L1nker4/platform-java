@@ -21,7 +21,7 @@ public class UploadServiceImpl implements UploadService {
     @Autowired
     private AliyunOssService aliyunOssService;
 
-    private static final String KEY_PREFIX = "test";
+    private static final String KEY_PREFIX = "xmall";
 
 
     @Override

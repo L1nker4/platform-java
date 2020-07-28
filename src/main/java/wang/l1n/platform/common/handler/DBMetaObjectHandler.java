@@ -2,7 +2,10 @@ package wang.l1n.platform.common.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import wang.l1n.platform.common.authentication.JWTUtil;
+import wang.l1n.platform.common.utils.ForestUtil;
 
 import java.time.LocalDateTime;
 import java.util.Date;

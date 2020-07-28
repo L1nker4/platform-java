@@ -6,10 +6,16 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import wang.l1n.platform.common.properties.ForestProperties;
 import wang.l1n.platform.common.utils.SpringContextUtil;
+import wang.l1n.platform.system.entity.User;
+import wang.l1n.platform.system.manager.UserManager;
 
 import java.util.Date;
 
@@ -22,7 +28,7 @@ import java.util.Date;
 @Slf4j
 public class JWTUtil {
 
-    private static final long EXPIRE_TIME = SpringContextUtil.getBean(ForestProperties.class).getShiro().getJwtTimeOut() * 1000;
+    private static final long EXPIRE_TIME = 86400L * 1000;
 
     /**
      * 校验 token是否正确

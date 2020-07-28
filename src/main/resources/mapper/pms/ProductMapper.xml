@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wang.l1n.platform.platform.pms.mapper.ProductMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product_category_id, name, pic, product_sn, delete_status, publish_status, new_status, recommand_status, sale, price, promotion_price, gift_point, sub_title, description, original_price, stock, low_stock, preview_status, service_ids, params_ids, keywords, note, album_pics, detail_title, detail_desc, promotion_start_time, promotion_end_time, promotion_per_limit, promotion_type, create_time, update_time
+    </sql>
+
+</mapper>
