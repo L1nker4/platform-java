@@ -13,7 +13,7 @@ import wang.l1n.platform.platform.pms.entity.Product;
  * @author L1nker4
  * @since 2020-07-28
  */
-public interface ProductService extends IService<Product> {
+public interface IProductService extends IService<Product> {
 
     CommonResult getList(QueryRequest request);
 }

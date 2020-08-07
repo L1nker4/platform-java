@@ -77,7 +77,7 @@ public class MenuController extends BaseController {
     @Log("修改菜单/按钮")
     @PutMapping
     @RequiresPermissions("menu:update")
-    public void updateMenu(@Valid Menu menu) throws ForestException {
+    public void updateMenu(@Valid @RequestBody Menu menu) throws ForestException {
         try {
             this.menuService.updateMenu(menu);
         } catch (Exception e) {

@@ -185,6 +185,7 @@ public class LoginController {
             // 删除对应的 token缓存
             redisService.del(ForestConstant.TOKEN_CACHE_PREFIX + kickoutUser.getToken() + "." + kickoutUser.getIp());
         }
+        userManager.deleteUserRedisCache(id);
     }
 
     @GetMapping("logout/{id}")

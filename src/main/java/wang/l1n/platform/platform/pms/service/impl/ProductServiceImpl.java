@@ -10,7 +10,7 @@ import wang.l1n.platform.common.entity.CommonResult;
 import wang.l1n.platform.common.entity.QueryRequest;
 import wang.l1n.platform.platform.pms.entity.Product;
 import wang.l1n.platform.platform.pms.mapper.ProductMapper;
-import wang.l1n.platform.platform.pms.service.ProductService;
+import wang.l1n.platform.platform.pms.service.IProductService;
 
 /**
  * <p>
@@ -21,7 +21,7 @@ import wang.l1n.platform.platform.pms.service.ProductService;
  * @since 2020-07-28
  */
 @Service
-public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements ProductService {
+public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
     @Autowired
     private ProductMapper productMapper;

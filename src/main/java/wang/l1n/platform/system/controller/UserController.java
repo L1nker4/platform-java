@@ -17,6 +17,7 @@ import wang.l1n.platform.common.utils.MD5Util;
 import wang.l1n.platform.system.entity.Role;
 import wang.l1n.platform.system.entity.User;
 import wang.l1n.platform.system.entity.UserConfig;
+import wang.l1n.platform.system.entity.request.UpdateAvatorRequest;
 import wang.l1n.platform.system.service.RoleService;
 import wang.l1n.platform.system.service.UserConfigService;
 import wang.l1n.platform.system.service.UserService;
@@ -50,11 +51,11 @@ public class UserController extends BaseController {
 
     @GetMapping("/{username}")
     public User detail(@NotBlank(message = "{required}") @PathVariable String username) {
-        User user=this.userService.findByName(username);
+        User user = this.userService.findByName(username);
         //修复用户修改自己的个人信息第二次提示roleId不能为空
-        List<Role> roles=roleService.findUserRole(username);
-        List<Long> roleIds=roles.stream().map(role ->role.getRoleId()).collect(Collectors.toList());
-        String roleIdStr= StringUtils.join(roleIds.toArray(new Long[roleIds.size()]),",");
+        List<Role> roles = roleService.findUserRole(username);
+        List<Long> roleIds = roles.stream().map(role -> role.getRoleId()).collect(Collectors.toList());
+        String roleIdStr = StringUtils.join(roleIds.toArray(new Long[roleIds.size()]), ",");
         user.setRoleId(roleIdStr);
         return user;
     }
@@ -106,7 +107,7 @@ public class UserController extends BaseController {
     }
 
     @PutMapping("profile")
-    public void updateProfile(@Valid User user) throws ForestException {
+    public void updateProfile(@RequestBody @Valid User user) throws ForestException {
         try {
             this.userService.updateProfile(user);
         } catch (Exception e) {
@@ -117,11 +118,9 @@ public class UserController extends BaseController {
     }
 
     @PutMapping("avatar")
-    public void updateAvatar(
-            @NotBlank(message = "{required}") String username,
-            @NotBlank(message = "{required}") String avatar) throws ForestException {
+    public void updateAvatar(@RequestBody @Valid UpdateAvatorRequest request) throws ForestException {
         try {
-            this.userService.updateAvatar(username, avatar);
+            this.userService.updateAvatar(request.getUsername(), request.getAvatar());
         } catch (Exception e) {
             message = "修改头像失败";
             log.error(message, e);

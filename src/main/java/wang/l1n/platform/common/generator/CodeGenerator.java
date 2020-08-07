@@ -40,7 +40,7 @@ public class CodeGenerator {
         //定义生成的实体类中日期类型
         gc.setDateType(DateType.ONLY_DATE);
         //开启Swagger2模式
-//        gc.setSwagger2(true);
+        gc.setSwagger2(true);
         gc.setBaseColumnList(true);
 
         mpg.setGlobalConfig(gc);

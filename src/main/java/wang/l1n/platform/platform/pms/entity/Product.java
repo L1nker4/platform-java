@@ -10,6 +10,7 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import wang.l1n.platform.common.entity.common.BaseEntity;
 
 /**
  * <p>
@@ -23,7 +24,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("pms_product")
-public class Product implements Serializable {
+public class Product extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -206,18 +207,5 @@ public class Product implements Serializable {
      */
     @TableField("promotion_type")
     private Integer promotionType;
-
-    /**
-     * 创建时间
-     */
-    @TableField("create_time")
-    private Date createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField("update_time")
-    private Date updateTime;
-
 
 }

@@ -2,6 +2,7 @@ package wang.l1n.platform.system.controller;
 
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.wuwenze.poi.ExcelKit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -85,7 +86,7 @@ public class RoleController extends BaseController {
     @Log("修改角色")
     @PutMapping
     @RequiresPermissions("role:update")
-    public void updateRole(Role role) throws ForestException {
+    public void updateRole(@RequestBody Role role) throws ForestException {
         try {
             this.roleService.updateRole(role);
         } catch (Exception e) {

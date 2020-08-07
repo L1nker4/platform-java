@@ -14,7 +14,7 @@ import wang.l1n.platform.common.entity.constant.MessageConstant;
 import wang.l1n.platform.platform.pms.entity.request.AddProductRequest;
 import wang.l1n.platform.platform.pms.entity.Product;
 import wang.l1n.platform.platform.pms.entity.request.UpdateProductRequest;
-import wang.l1n.platform.platform.pms.service.ProductService;
+import wang.l1n.platform.platform.pms.service.IProductService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -34,7 +34,7 @@ public class ProductController {
 
 
     @Autowired
-    private ProductService productService;
+    private IProductService productService;
 
     @GetMapping
     @RequiresPermissions("pms:product:view")
