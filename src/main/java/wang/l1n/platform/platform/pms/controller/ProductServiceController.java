@@ -2,6 +2,7 @@ package wang.l1n.platform.platform.pms.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.wuwenze.poi.ExcelKit;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import wang.l1n.platform.common.entity.constant.MessageConstant;
 import wang.l1n.platform.platform.pms.entity.ProductService;
 
 import wang.l1n.platform.platform.pms.entity.request.AddProductServiceRequest;
+import wang.l1n.platform.platform.pms.entity.request.ExportProductCategoryRequest;
 import wang.l1n.platform.platform.pms.entity.request.UpdateProductServiceRequest;
 import wang.l1n.platform.platform.pms.service.ProductServiceService;
 
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -47,9 +50,10 @@ public class ProductServiceController extends BaseController {
 
     @GetMapping
     @RequiresPermissions("pms:service:view")
-    public Map<String, Object> serviceList(@Valid QueryRequest request){
+    public CommonResult serviceList(@Valid QueryRequest request){
         IPage<ProductService> iPage = productServiceService.getList(request);
-        return getDataTable(iPage);
+        return new CommonResult().success(iPage);
+//        return getDataTable(iPage);
     }
 
     @PostMapping
@@ -72,12 +76,22 @@ public class ProductServiceController extends BaseController {
         return new CommonResult().success(MessageConstant.UPDATE_SUCCESS_MESSAGE);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @Log("删除商品服务")
     @RequiresPermissions("pms:service:delete")
     public CommonResult deleteService(@NotBlank(message = "{required}") @PathVariable String id){
-        productServiceService.removeById(id);
+        String[] ids = id.split(StringPool.COMMA);
+        productServiceService.removeByIds(Arrays.asList(ids));
         return new CommonResult().success(MessageConstant.DELETE_SUCCESS_MESSAGE);
+    }
+
+    @PostMapping("excel")
+    @Log("导出商品服务表")
+    @RequiresPermissions("pms:category:export")
+    public void export(HttpServletResponse response){
+        List<ProductService> list = productServiceService.list();
+        ExcelKit.$Export(ProductService.class, response)
+                .downXlsx(list, false);
     }
 
 
