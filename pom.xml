@@ -27,7 +27,7 @@
         <java.version>1.8</java.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <swagger.ui>2.9.2</swagger.ui>
-        <fastjson.version>1.2.62</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
     <dependencies>
