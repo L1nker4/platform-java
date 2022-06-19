@@ -1,7 +1,6 @@
 server:
   port: 9009
 
-
 spring:
   datasource:
     url: jdbc:p6spy:mysql://47.93.37.255:3306/platform?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
@@ -41,6 +40,7 @@ mybatis-plus:
   mapper-locations: classpath:mapper/*/*.xml
   configuration:
     jdbc-type-for-null: null
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
   global-config:
     # 关闭 mybatis-plus的 banner
     banner: false
@@ -67,12 +67,18 @@ forest:
     jwtTimeOut: 3600
   # Swagger相关配置
   swagger:
-    basePackage: wang.l1n.forest
-    title: Forest VUE API
-    description: Forest API
+    basePackage: wang.l1n.platform
+    title: Xmall 管理端
+    description: Xmall API
     version: 1.0
     author: L1nker4
     url: https://l1n.wang
     email: l1nker4@outlook.com
     license: Apache 2.0
     licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
+  oss:
+    accessKeyId: LTAI4FkQaPa59MPLN8thPGso
+    accessKeySecret: 5vxYxPko5oT4joUc8AjahrTZEIflT2
+    bucketName: forest-oss
+    fileHost: http://forest-oss.oss-cn-hangzhou.aliyuncs.com
+    endpoint: http://oss-cn-hangzhou.aliyuncs.com
