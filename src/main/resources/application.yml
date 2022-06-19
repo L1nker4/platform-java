@@ -40,7 +40,6 @@ mybatis-plus:
   mapper-locations: classpath:mapper/*/*.xml
   configuration:
     jdbc-type-for-null: null
-    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
   global-config:
     # 关闭 mybatis-plus的 banner
     banner: false
@@ -76,9 +75,3 @@ forest:
     email: l1nker4@outlook.com
     license: Apache 2.0
     licenseUrl: https://www.apache.org/licenses/LICENSE-2.0.html
-  oss:
-    accessKeyId: LTAI4FkQaPa59MPLN8thPGso
-    accessKeySecret: 5vxYxPko5oT4joUc8AjahrTZEIflT2
-    bucketName: forest-oss
-    fileHost: http://forest-oss.oss-cn-hangzhou.aliyuncs.com
-    endpoint: http://oss-cn-hangzhou.aliyuncs.com
